@@ -1,0 +1,189 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <title>ShowYou</title>
+  	
+	  <link rel="stylesheet" href="./css/jquery.mobile.structure-1.3.0.min.css" />
+		
+	  <script type="text/javascript" charset="utf-8" src="js/cordova-2.6.0.js"></script>
+	  <script type="text/javascript" src="jquery.mobile/jquery-1.7.2.min"></script>
+	  <script type="text/javascript" src="jquery.mobile/jquery.mobile-1.3.0.min.js"></script>
+
+	  <script type="text/javascript" charset="utf-8">
+	  	var conexionOK = false;
+	  	var pathBase = "ShowYou";
+	  	var pathImages  = "file://mnt/sdcard/";
+	  	var pathLista = pathBase + "/lista.json";
+	  	var pathPlantillas = pathBase + "/plantillas";
+	  	var slides = null;
+	  	var slideActual = 0;
+	  	var temporizador = 0;
+	  	var plantillaActual = "";
+	  	var htmlPAGES = "";
+		
+		function Slide(){
+		    this.plantilla = "";
+		    this.temporizado = "";
+		    this.contenido = null;
+		    
+		    this.loadFromJSON = function(json){
+		        this.plantilla = json.plantilla;
+		        this.temporizado = json.temporizado;
+		        this.contenido = new Contenido();
+		        this.contenido.loadFromJSON(json.contenido);
+		    }
+		}
+		
+		function Contenido(){
+			this.titulo = "";
+			this.mensaje = "";
+			this.texto = "";
+			this.imagen = "";
+			
+			this.loadFromJSON = function(json){
+		        this.titulo = json.titulo;
+		        this.mensaje = json.mensaje;
+		        this.texto = json.texto;
+		        this.imagen = json.imagen;
+		    }
+			
+		}
+	
+		function generaSlide(slide){
+			getPlantilla(slide.plantilla);			
+		}
+		function generaPAGES(){
+			for (i=0;i<slides.length;i++){
+				generaSlide(slides[i]);
+			}
+		}
+		function cargaSlides(jLista){
+	        slides = new Array();
+	        for(i=0;i<jLista.lista.length;i++){
+	            slide = new Slide();
+	            slide.loadFromJSON(jLista.lista[i]);
+	            slides[i] = slide;
+	            //generaSlide(slide);
+	        }
+	        
+	    }
+	    
+	    function updateSlide(plantillaCode){
+	    	var txt = plantillaCode;
+	    	txt = txt.replace("{%titulo%}",slides[slideActual].contenido.titulo);
+	    	txt = txt.replace("{%mensaje%}",slides[slideActual].contenido.mensaje);
+	    	txt = txt.replace("{%texto%}",slides[slideActual].contenido.texto);
+	    	txt = txt.replace("{%imagen%}",pathImages + pathPlantillas + "/" + slides[slideActual].plantilla + slides[slideActual].contenido.imagen);
+	    	//alert(pathImages + pathPlantillas + "/" + slides[slideActual].plantilla + slides[slideActual].contenido.imagen);
+			$('#cc').html(txt);
+			$('#cc').page();
+			window.clearInterval(temporizador);			
+			temporizador = window.setInterval(cambiaSlide, (slides[slideActual].temporizado)*1000);
+			slideActual++;
+	    }
+	    function leeFichero(file){
+	        var reader = new FileReader();
+	        reader.onloadend = function(evt) {                
+	            updateSlide(evt.target.result);
+	        };
+	        
+	        reader.readAsText(file);	         
+	    }
+	  	function falloAlLeer(evt) {
+        	alert("Fallo al leer el fichero: " +error.code);
+    	}
+	    function successGetPlantilla(entry) {
+	        entry.file(leeFichero, falloAlLeer);
+	    }
+	    function failGetPlantilla(error) {
+	        alert("No se pudo obtener la plantilla: " + error.code);
+	    }	    
+	    function onFileSystemSuccessPlantilla(fileSystem) {	  
+        	fileSystem.root.getFile(plantillaActual,  {create: true, exclusive: false}, successGetPlantilla, failGetPlantilla);
+    	}
+
+	    function getPlantilla(plantilla){
+	    	path = pathPlantillas + "/" + plantilla + "/default.pl";	
+	    	plantillaActual = path;    	
+	    	window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, onFileSystemSuccessPlantilla, fail);
+	    	
+	    }
+	    
+	    
+	    
+	    function cambiaSlide(){			
+			if (slideActual >= slides.length)
+				slideActual = 0;
+			
+			getPlantilla(slides[slideActual].plantilla);
+			
+			
+		}
+	    function comienzaPresentacion(){
+	    	cambiaSlide();
+	    }
+		function leeFicheroLista(file){
+	        var reader = new FileReader();
+	        reader.onloadend = function(evt) {    
+	            tLista = evt.target.result;
+	            jLista =JSON.parse(evt.target.result);  
+	            cargaSlides(jLista);
+	            comienzaPresentacion();
+	            //generaPAGES();
+	        };
+	        
+	        reader.readAsText(file);	         
+	    }
+	  	function falloAlLeerLista(evt) {
+        	alert("Fallo al leer la lista de reproduccion: " +error.code);
+    	}
+		function successGetLista(entry) {
+	        entry.file(leeFicheroLista, falloAlLeer);
+	    }
+	    function failGetLista(error) {
+	        alert("No se pudo obtener la lista de reproduccion: " + error.code);
+	    }
+		function fail(){
+        	alert("Fallo al acceder al sistema de ficheros.");
+    	}
+    	function onFileSystemSuccessLista(fileSystem) {
+        	fileSystem.root.getFile(pathLista,  {create: true, exclusive: false}, successGetLista, failGetLista);
+    	}	
+		function onDeviceReady() {
+			conexionOK = checkConnection();	
+			window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, onFileSystemSuccessLista, fail);					
+		}
+
+		
+		function escribeFichero(writer){
+			writer.write(txtLista);
+		}
+		function falloAlEscribir(evt){
+			alert("Fallo:"+ error.code);
+		}		
+
+		function checkConnection() {
+			var networkState = navigator.network.connection.type;		
+		    var states = {};
+		    states[Connection.UNKNOWN]  = 'Unknown connection';
+		    states[Connection.ETHERNET] = 'Ethernet connection';
+		    states[Connection.WIFI]     = 'WiFi connection';
+		    states[Connection.CELL_2G]  = 'Cell 2G connection';
+		    states[Connection.CELL_3G]  = 'Cell 3G connection';
+		    states[Connection.CELL_4G]  = 'Cell 4G connection';
+		    states[Connection.NONE]     = 'No network connection';
+		    return Connection.NONE != networkState;
+		}  
+		
+		document.addEventListener("deviceready", onDeviceReady, false);
+</script>  
+
+  </head>
+  <body> 
+  	<div data-role="page" id="cc">
+  	
+	</div>
+  </body>
+</html>
