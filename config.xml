@@ -15,4 +15,7 @@
 
 
 	<preference name="orientation" value="landscape" />
+	<preference name="fullscreen" value="true" />
+	
+	<access origin="http://127.0.0.1*"/>
 </widget>
