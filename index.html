@@ -160,8 +160,11 @@
     		alert(fileSystem.name);
     		alert(fileSystem.root.name);
     		alert(fileSystem.root.fullPath);
-    		pathRoot = fileSystem.root.name + "/";
-    		pathImages  = "file://mnt/"+pathRoot;
+    		//pathRoot = fileSystem.root.name + "/";
+    		pathRoot = fileSystem.root.fullPath + "/";
+    		alert("ROOT"+pathRoot);
+    		//pathImages  = "file://mnt/"+pathRoot;
+    		pathImages = pathRoot;
     		//pathLista =  pathRoot + pathLista;
     		pathLista = "lista.json";
     		alert("IMG: "+pathImages);
