@@ -154,7 +154,7 @@
     		alert(fileSystem.root.name);
     		pathRoot = fileSystem.root.name + "/";
     		pathImages  = "file://mnt/"+pathRoot;
-    		pathBase = pathRoot + pathLista;
+    		pathLista = pathRoot + pathLista;
     		alert("IMG: "+pathImages);
     		alert("LISTA : "+ pathLista);
         	fileSystem.root.getFile(pathLista,  {create: true, exclusive: false}, successGetLista, failGetLista);
