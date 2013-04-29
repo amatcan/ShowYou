@@ -134,7 +134,7 @@
 	        	alert("Leiida!"+evt.target.result);    
 	            tLista = evt.target.result;
 	            jLista =JSON.parse(evt.target.result);  
-	           alert("convertida!");
+	           alert("convertida");
 	            cargaSlides(jLista);
 	            comienzaPresentacion();
 	            //generaPAGES();
@@ -159,6 +159,7 @@
     	function onFileSystemSuccessLista(fileSystem) {
     		alert(fileSystem.name);
     		alert(fileSystem.root.name);
+    		alert(fileSystem.root.fullPath);
     		pathRoot = fileSystem.root.name + "/";
     		pathImages  = "file://mnt/"+pathRoot;
     		//pathLista =  pathRoot + pathLista;
