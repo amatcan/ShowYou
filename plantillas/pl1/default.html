@@ -1,22 +1,32 @@
 <html>
 <head>
+<meta name="viewport" content="width=device-width,height=height-device, initial-scale=1, maximum-scale=1" />
 </head>
 <body>
 <style type="text/css">
-	body{
-		font-size:16px;
+	body, html {
+	  min-height:100%;
+	  height:auto !important;
+	  height:100%;
+	  font-size:16px;
 	}
 	.content{
-		background-color:white;
+		background-color: #dee;
+		position:absolute;
+		height:auto;
+		top:0px;
+		bottom:0px;
 		width:100%;
 	}
 	.left{
 		float: left;
 		text-align: center;
 		width: 30%;
+		bottom:0px;
 	}
 	.left img{
 		width:20%;
+		
 	}
 	.right{
 		float:left;
@@ -24,6 +34,7 @@
 		width:70%;
 		color: yellow;
 		text-align: center;
+		bottom:0px;
 	}
 </style>
 <div class="content">
