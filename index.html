@@ -77,7 +77,7 @@
 	    	txt = txt.replace("{%mensaje%}",slides[slideActual].contenido.mensaje);
 	    	txt = txt.replace("{%texto%}",slides[slideActual].contenido.texto);
 	    	txt = txt.replace("{%imagen%}",pathImages + pathPlantillas + "/" + slides[slideActual].plantilla + slides[slideActual].contenido.imagen);
-	    	alert(pathImages + pathPlantillas + "/" + slides[slideActual].plantilla + slides[slideActual].contenido.imagen);
+	    	//alert(pathImages + pathPlantillas + "/" + slides[slideActual].plantilla + slides[slideActual].contenido.imagen);
 			$('#cc').html(txt);
 			$('#cc').page();
 			window.clearInterval(temporizador);			
@@ -107,7 +107,6 @@
 
 	    function getPlantilla(plantilla){
 	    	path = pathPlantillas + "/" + plantilla + "/default.pl";	
-	    	alert("getPlangilla: " + path);
 	    	plantillaActual = path;    	
 	    	window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, onFileSystemSuccessPlantilla, fail);
 	    	
@@ -127,27 +126,22 @@
 	    	cambiaSlide();
 	    }
 		function leeFicheroLista(file){
-		alert("leyendo lista:" + file);
 	        var reader = new FileReader();
-	        alert("A leer");
-	        reader.onloadend = function(evt) {
-	        	alert("Leiida!"+evt.target.result);    
+	        reader.onloadend = function(evt) {    
 	            tLista = evt.target.result;
 	            jLista =JSON.parse(evt.target.result);  
-	           alert("convertida");
 	            cargaSlides(jLista);
 	            comienzaPresentacion();
 	            //generaPAGES();
 	        };
 	        
-	        reader.readAsText(file);
-	        alert("FF");	         
+	        reader.readAsText(file);;	         
 	    }
 	  	function falloAlLeerLista(evt) {
         	alert("Fallo al leer la lista de reproduccion: " +error.code);
     	}
 		function successGetLista(entry) {
-			alert("GetLista: " + entry.name + "\n" +  entry.fullpath);
+			//alert("GetLista: " + entry.name + "\n" +  entry.fullpath);
 	        entry.file(leeFicheroLista, falloAlLeer);
 	    }
 	    function failGetLista(error) {
@@ -157,21 +151,11 @@
         	alert("Fallo al acceder al sistema de ficheros.");
     	}
     	function onFileSystemSuccessLista(fileSystem) {
-    		alert(fileSystem.name);
-    		alert(fileSystem.root.name);
-    		alert(fileSystem.root.fullPath);
-    		//pathRoot = fileSystem.root.name + "/";
     		pathRoot = fileSystem.root.fullPath + "/";
-    		alert("ROOT"+pathRoot);
-    		//pathImages  = "file://mnt/"+pathRoot;
     		pathImages = pathRoot;
-    		//pathLista =  pathRoot + pathLista;
-    		pathLista = "lista.json";
-    		alert("IMG: "+pathImages);
-    		alert("LISTA : "+ pathLista);
+    		pathLista = "ShowYou/lista.json";
     		pathPlantillas = pathRoot + pathPlantillas;
     		pathPlantillas="ShowYou/plantillas";
-    		alert("plantillas: " + pathPlantillas);
         	fileSystem.root.getFile(pathLista,  {create: true, exclusive: false}, successGetLista, failGetLista);
     	}	
 		function onDeviceReady() {
