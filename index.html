@@ -155,7 +155,7 @@
     		pathRoot = fileSystem.root.name + "/";
     		pathImages  = "file://mnt/"+pathRoot;
     		//pathLista =  "file://mnt/" + pathRoot + pathLista;
-    		pathLista = "sdcard/"+pathLista;
+    		pathLista = "file://sdcard/"+pathLista;
     		alert("IMG: "+pathImages);
     		alert("LISTA : "+ pathLista);
         	fileSystem.root.getFile(pathLista,  {create: true, exclusive: false}, successGetLista, failGetLista);
