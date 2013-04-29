@@ -107,6 +107,7 @@
 
 	    function getPlantilla(plantilla){
 	    	path = pathPlantillas + "/" + plantilla + "/default.pl";	
+	    	alert("getPlangilla:" + path);
 	    	plantillaActual = path;    	
 	    	window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, onFileSystemSuccessPlantilla, fail);
 	    	
@@ -126,10 +127,12 @@
 	    	cambiaSlide();
 	    }
 		function leeFicheroLista(file){
+		alert("leyendo lista:" + file);
 	        var reader = new FileReader();
 	        reader.onloadend = function(evt) {    
 	            tLista = evt.target.result;
 	            jLista =JSON.parse(evt.target.result);  
+	            alerT(tLista);
 	            cargaSlides(jLista);
 	            comienzaPresentacion();
 	            //generaPAGES();
