@@ -99,7 +99,7 @@
 	        entry.file(leeFichero, falloAlLeer);
 	    }
 	    function failGetPlantilla(error) {
-	        alert("No se pudo obtener la plantilla: " + error.code);
+	        alert("No se pudo obtener la plantilla: " + error.code + "\n"+error);
 	    }	    
 	    function onFileSystemSuccessPlantilla(fileSystem) {	  
         	fileSystem.root.getFile(plantillaActual,  {create: true, exclusive: false}, successGetPlantilla, failGetPlantilla);
@@ -107,7 +107,7 @@
 
 	    function getPlantilla(plantilla){
 	    	path = pathPlantillas + "/" + plantilla + "/default.pl";	
-	    	alert("getPlangilla:" + path);
+	    	alert("getPlangilla: " + path);
 	    	plantillaActual = path;    	
 	    	window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, onFileSystemSuccessPlantilla, fail);
 	    	
@@ -170,6 +170,7 @@
     		alert("IMG: "+pathImages);
     		alert("LISTA : "+ pathLista);
     		pathPlantillas = pathRoot + pathPlantillas;
+    		pathPlantillas="ShowYou/plantillas";
     		alert("plantillas: " + pathPlantillas);
         	fileSystem.root.getFile(pathLista,  {create: true, exclusive: false}, successGetLista, failGetLista);
     	}	
