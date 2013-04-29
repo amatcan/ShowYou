@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<widget xmlns		= "http://www.w3.org/ns/widgets"
+	xmlns:gap	= "http://phonegap.com/ns/1.0"
+	id		= "neexteam.showyou"
+	version 	= "1.0.0">
+	<name>ShowYou</name>
+	<description>
+		Propuesta ShowYou
+	</description>
+
+	<author href="http://amatcan.github.com"
+		email="alexander_mateos@ieci.es">
+		Alexander Mateos Candela
+	</author>
+
+
+	<preference name="orientation" value="landscape" />
+</widget>
