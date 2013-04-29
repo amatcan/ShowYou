@@ -152,9 +152,11 @@
     	function onFileSystemSuccessLista(fileSystem) {
     		alert(fileSystem.name);
     		alert(fileSystem.root.name);
-    		pathRoot = fileSystem.root.name;
-    		pathImages  = "file://mnt/"+pathRoot+"/";
+    		pathRoot = fileSystem.root.name + "/";
+    		pathImages  = "file://mnt/"+pathRoot;
+    		pathBase = pathRoot + pathLista;
     		alert("IMG: "+pathImages);
+    		alert("LISTA : "+ pathLista);
         	fileSystem.root.getFile(pathLista,  {create: true, exclusive: false}, successGetLista, failGetLista);
     	}	
 		function onDeviceReady() {
