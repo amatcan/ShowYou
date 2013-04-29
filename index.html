@@ -132,7 +132,7 @@
 	        reader.onloadend = function(evt) {    
 	            tLista = evt.target.result;
 	            jLista =JSON.parse(evt.target.result);  
-	            alerT(tLista);
+	           
 	            cargaSlides(jLista);
 	            comienzaPresentacion();
 	            //generaPAGES();
@@ -144,7 +144,7 @@
         	alert("Fallo al leer la lista de reproduccion: " +error.code);
     	}
 		function successGetLista(entry) {
-			alert("GetLista: " + entry);
+			alert("GetLista: " + entry.name + "\n" +  entry.fullpath);
 	        entry.file(leeFicheroLista, falloAlLeer);
 	    }
 	    function failGetLista(error) {
