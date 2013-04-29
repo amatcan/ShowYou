@@ -149,6 +149,8 @@
         	alert("Fallo al acceder al sistema de ficheros.");
     	}
     	function onFileSystemSuccessLista(fileSystem) {
+    		alert(fileSystem.name);
+    		alert(fileSystem.root.name);
         	fileSystem.root.getFile(pathLista,  {create: true, exclusive: false}, successGetLista, failGetLista);
     	}	
 		function onDeviceReady() {
