@@ -129,16 +129,19 @@
 		function leeFicheroLista(file){
 		alert("leyendo lista:" + file);
 	        var reader = new FileReader();
-	        reader.onloadend = function(evt) {    
+	        alert("A leer");
+	        reader.onloadend = function(evt) {
+	        	alert("Leiida!"+evt.target.result);    
 	            tLista = evt.target.result;
 	            jLista =JSON.parse(evt.target.result);  
-	           
+	           alert("convertida!");
 	            cargaSlides(jLista);
 	            comienzaPresentacion();
 	            //generaPAGES();
 	        };
 	        
-	        reader.readAsText(file);	         
+	        reader.readAsText(file);
+	        alert("FF");	         
 	    }
 	  	function falloAlLeerLista(evt) {
         	alert("Fallo al leer la lista de reproduccion: " +error.code);
