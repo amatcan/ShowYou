@@ -13,8 +13,9 @@
 
 	  <script type="text/javascript" charset="utf-8">
 	  	var conexionOK = false;
-	  	var pathBase = "ShowYou";
-	  	var pathImages  = "file://mnt/sdcard/";
+	  	var pathRoot = "sdcard/";
+	  	var pathBase = "ShowYou";	  	
+	  	var pathImages  = "file://mnt/"+pathRoot;
 	  	var pathLista = pathBase + "/lista.json";
 	  	var pathPlantillas = pathBase + "/plantillas";
 	  	var slides = null;
@@ -76,7 +77,7 @@
 	    	txt = txt.replace("{%mensaje%}",slides[slideActual].contenido.mensaje);
 	    	txt = txt.replace("{%texto%}",slides[slideActual].contenido.texto);
 	    	txt = txt.replace("{%imagen%}",pathImages + pathPlantillas + "/" + slides[slideActual].plantilla + slides[slideActual].contenido.imagen);
-	    	//alert(pathImages + pathPlantillas + "/" + slides[slideActual].plantilla + slides[slideActual].contenido.imagen);
+	    	alert(pathImages + pathPlantillas + "/" + slides[slideActual].plantilla + slides[slideActual].contenido.imagen);
 			$('#cc').html(txt);
 			$('#cc').page();
 			window.clearInterval(temporizador);			
@@ -151,6 +152,9 @@
     	function onFileSystemSuccessLista(fileSystem) {
     		alert(fileSystem.name);
     		alert(fileSystem.root.name);
+    		pathRoot = fileSystem.root.name;
+    		pathImages  = "file://mnt/"+pathRoot+"/";
+    		alert("IMG: "+pathImages);
         	fileSystem.root.getFile(pathLista,  {create: true, exclusive: false}, successGetLista, failGetLista);
     	}	
 		function onDeviceReady() {
