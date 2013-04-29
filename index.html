@@ -169,6 +169,8 @@
     		pathLista = "lista.json";
     		alert("IMG: "+pathImages);
     		alert("LISTA : "+ pathLista);
+    		pathPlantillas = pathRoot + pathPlantillas;
+    		alert("plantillas: " + pathPlantillas);
         	fileSystem.root.getFile(pathLista,  {create: true, exclusive: false}, successGetLista, failGetLista);
     	}	
 		function onDeviceReady() {
