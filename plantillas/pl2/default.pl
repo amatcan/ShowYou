@@ -3,13 +3,15 @@
 		font-size:16px;
 	}
 	.content{
+		background-color:white;
 		width:100%;
-		text-align:center;
+		height:100%;
 	}
 	.header{
 		background-color:orange;
 		width:100%;
-		height:3em;
+		height:20%;
+		text-align:center;
 	}
 	.header h1{
 		margin:0;
@@ -17,17 +19,17 @@
 		line-height:100%;
 	}
 	.cuerpo{
-		background-color: yellow;
-		display: inline-block;
-		width: 100%;
+		background-color:yellow;
+		text-align:center;
+		height:80%;
+		width:100%;
 	}
 	.cuerpo h2{
 		margin-top: 0;
-		padding-top: 2em;
+		padding-top: 1em;
 	}
-	
 	.cuerpo img{
-		height:30%;
+		max-height:20%;
 	}
 	
 </style>

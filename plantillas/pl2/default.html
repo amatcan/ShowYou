@@ -1,15 +1,22 @@
 <style type="text/css">
+	.marco{
+		height:768px;
+		width:1024px;
+		border:1px solid black;
+	}
 	body{
 		font-size:16px;
 	}
 	.content{
+		background-color:white;
 		width:100%;
-		text-align:center;
+		height:100%;
 	}
 	.header{
 		background-color:orange;
 		width:100%;
-		height:3em;
+		height:20%;
+		text-align:center;
 	}
 	.header h1{
 		margin:0;
@@ -18,14 +25,21 @@
 	}
 	.cuerpo{
 		background-color:yellow;
+		text-align:center;
+		height:80%;
+		width:100%;
 	}
 	.cuerpo h2{
 		margin-top: 0;
-		padding-top: 2em;
+		padding-top: 1em;
+	}
+	.cuerpo img{
+		max-height:50%;
 	}
 	
 	
 </style>
+<div class="marco">
 <div class="content">
 	<div class="header">
 		<h1>{%titulo%}</h1>
@@ -35,4 +49,5 @@
 		<img src="{%imagen%}"/>
 		<p>{%texto%}</p>		
 	</div>
+</div>
 </div>

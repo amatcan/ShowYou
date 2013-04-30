@@ -3,38 +3,43 @@
 </head>
 <body>
 <style type="text/css">
+	.marco{
+		height:768px;
+		width:1024px;
+		border:1px solid black;
+	}
 	body{
 		font-size:16px;
-	}
-	.content{
-		background-color:white;
-		width:100%;
 	}
 	.left{
 		float: left;
 		text-align: center;
 		width: 30%;
+		height:100%;
 	}
 	.left img{
 		width:20%;
 	}
 	.right{
 		float:left;
-		background-color:green;
+		background-color:red;
 		width:70%;
-		color: yellow;
+		height:100%;
+		color: white;
 		text-align: center;
 	}
 </style>
+<div class="marco">
 <div class="content">
 	<div class="left">
-		<img src="{%imagen%}"/>
+		<p<img src="{%imagen%}"/>
 	</div>
 	<div class="right">
 		<h1>{%titulo%}</h1>
 		<h2>{%mensaje%}</h2>
 		<p>{%texto%}</p>
 	</div>
+</div>
 </div>
 </body>
 </html>
