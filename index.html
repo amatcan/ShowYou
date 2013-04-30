@@ -156,6 +156,7 @@
     		pathLista = "ShowYou/lista.json";
     		pathPlantillas = pathRoot + pathPlantillas;
     		pathPlantillas="ShowYou/plantillas";
+    		alert("ROOT: "+pathRoot+"\n"+"IMG: "+pathImages+"\n"+"LISTA: "+pathLista+"\n"+"PLANTILLAS: "+pathPlantillas);
         	fileSystem.root.getFile(pathLista,  {create: true, exclusive: false}, successGetLista, failGetLista);
     	}	
 		function onDeviceReady() {
