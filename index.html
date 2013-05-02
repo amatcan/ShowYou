@@ -160,7 +160,8 @@
         	fileSystem.root.getFile(pathLista,  {create: true, exclusive: false}, successGetLista, failGetLista);
     	}	
 		function onDeviceReady() {
-			$("#cc").attr("style","height:"+$(window).height()+";background-color:black");
+			alert($(window).height() + ", " + $(window).width());
+			$("#cc").attr("style","height:"+$(window).height()+";width:100%;background-color:black");
 			conexionOK = checkConnection();	
 			window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, onFileSystemSuccessLista, fail);					
 		}
